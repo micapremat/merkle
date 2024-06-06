@@ -4,6 +4,7 @@ import axios from 'axios'
 import type { HackerStory } from '@/interfaces/HackerStory'
 import type { Story } from '@/interfaces/Story'
 import type { Author } from '@/interfaces/Author'
+import HackerStoriesItem from './HackerStoriesItem.vue'
 
 const storiesIds = ref<number[]>([])
 const stories = ref<Story[]>([])
@@ -35,15 +36,16 @@ const getHackerStories = async () => {
 
   console.log(authorsResponse)
 
-  stories.value = hackerStories.map((story) => {
-    const author = authorsResponse.find((author) => story.by === author.id)
+  stories.value = hackerStories.map((story, index) => {
+    const author = authorsResponse.find((author) => story.by === author.id)!
     return {
       title: story.title,
       url: story.url,
       time: story.time,
       score: story.score,
       authorId: author.id,
-      karma: author.karma
+      karma: author.karma,
+      img: `/imgs/hacker${index + 1}.png`
     }
   })
   console.log(stories.value)
@@ -59,7 +61,7 @@ onMounted(async () => {
   <div>
     <ul>
       <li v-for="(story, index) in stories" :key="index">
-        <h2>{{ story.title }}</h2>
+        <HackerStoriesItem :story="story" />
       </li>
     </ul>
   </div>
