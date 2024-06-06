@@ -9,6 +9,7 @@ import HackerStoriesItem from './HackerStoriesItem.vue'
 const storiesIds = ref<number[]>([])
 const stories = ref<Story[]>([])
 const order = ref<boolean>(true)
+const loading = ref<boolean>(true)
 
 //get first 10 stories ids
 const getStoriesIds = async () => {
@@ -53,6 +54,7 @@ const getHackerStories = async () => {
       img: `/imgs/hacker${index + 1}.png`
     }
   })
+  loading.value = !loading.value
   orderByScore(true)
 }
 
@@ -73,7 +75,8 @@ onMounted(async () => {
 
 <template>
   <div class="list-wrapper">
-    <button class="btn" @click="orderByScore(order)">Sort</button>
+    <button class="btn" ref="orderButton" @click="orderByScore(order)">Sort</button>
+    <img src="/imgs/loading-buffering.gif" alt="loading" class="loading-img" v-if="loading" />
     <ul>
       <li v-for="(story, index) in stories" :key="index">
         <HackerStoriesItem :story="story" />
@@ -104,5 +107,10 @@ ul {
 .btn:hover {
   background-color: azure;
   cursor: pointer;
+}
+.loading-img {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
 }
 </style>

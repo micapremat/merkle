@@ -16,10 +16,12 @@ const formattedTime = (date: number) => {
       <div class="img-content">
         <img :src="story?.img" alt="" />
       </div>
-      <div class="story-content">
-        <h2>{{ story?.title }}</h2>
+      <div class="story-content" aria-labelledby="story-title-1">
+        <h2 tabindex="0" id="story-title-1">{{ story?.title }}</h2>
         <p class="url">
-          <a target="_blank" :href="story?.url">{{ story?.url }}</a>
+          <a target="_blank" :href="story?.url"
+            ><span class="title-bold">Story link: </span>{{ story?.url }}</a
+          >
         </p>
         <div class="item-content item-content-row">
           <p>{{ formattedTime(story?.time!) }}</p>
