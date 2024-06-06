@@ -37,3 +37,28 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Summary
+
+This project is about Hacker Stories news.
+You can see a list of 10 stories ordered by score. You have a button to sort the stories by score.
+The layout is responsive
+The API requires making many requests to obtain the data. I would improve the API.
+I had to modify the object to show it on the screen, adding author, karma and image. Duplicate authors are removed to avoid duplicate requests.
+For SEO I would use Nuxt.
+
+Added files:
+
+- src\components\HackerStoriesList.vue
+- src\components\HackerStoriesItem.vue
+- src\components\TheNav.vue
+- src\types\Author.ts
+- src\types\HackerStory.ts
+- src\types\Story.ts
+- public\imgs
+
+Modified files:
+
+- src\App.vue
+
+The rest is boilerplate.
